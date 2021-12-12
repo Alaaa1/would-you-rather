@@ -3,7 +3,7 @@ import Login from './Login'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/initial.js'
 import HomePage from './HomePage';
-import { LoadingBar } from 'react-redux-loading';
+import LoadingBar from 'react-redux-loading';
 
 class App extends Component {
   componentDidMount() {
