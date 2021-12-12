@@ -41,12 +41,14 @@ const friendOptions = [
 ]
 
 const DropdownList = () => (
-  <Dropdown
+  <div><Dropdown
     placeholder='Select Friend'
     fluid
     selection
     options={friendOptions}
   />
+    <button value='login'><a href="#">Login</a></button>
+  </div>
 )
 
 export default DropdownList
