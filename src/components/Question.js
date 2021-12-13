@@ -12,10 +12,9 @@ class Question extends Component {
                     <Image
                         floated='right'
                         size='mini'
-                        src='https://react.semantic-ui.com/images/avatar/large/steve.jpg'
+                        src={this.props.users[this.props.question.author].avatarURL}
                     />
-                    <Card.Header>Steve Sanders</Card.Header>
-                    <Card.Meta>Friends of Elliot</Card.Meta>
+                    <Card.Header>{this.props.users[this.props.question.author].name}</Card.Header>
                     <Card.Description>
                         <h3>Would You Rather</h3>
                         <p>{this.props.question.optionOne.text}</p>
@@ -35,12 +34,13 @@ class Question extends Component {
     }
 }
 
-const mapStateToProps = ({ authedUser, questions }, { id }) => {
+const mapStateToProps = ({ authedUser, questions, users }, { id }) => {
     const question = questions[id]
 
     return {
         authedUser,
         question,
+        users
     }
 }
 
