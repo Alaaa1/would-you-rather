@@ -30,7 +30,10 @@ class Login extends Component {
 
   getAuthedUser = (authedUser) => {
     console.log(authedUser)
-    setAuthedUser(authedUser);
+    return (dispatch) => {
+      return dispatch(setAuthedUser(authedUser))
+    }
+
   }
 
   handleChange = (e, { value }) => {
