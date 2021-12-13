@@ -8,19 +8,19 @@ const options = [
   {
     key: 'sarahedo',
     text: 'Sarah Edo',
-    value: 'Sarah Edo',
+    value: 'sarahedo',
     image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg' },
   },
   {
     key: 'tylermcginnis',
     text: 'Tyler McGinnis',
-    value: 'Tyler McGinnis',
+    value: 'tylermcginnis',
     image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/matt.jpg' },
   },
   {
     key: 'johndoe',
     text: 'John Doe',
-    value: 'John Doe',
+    value: 'johndoe',
     image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/christian.jpg' },
   }
 ]
@@ -28,12 +28,13 @@ const options = [
 
 class Login extends Component {
 
+  state = {
+    value: '',
+  }
+
   getAuthedUser = (authedUser) => {
     console.log(authedUser)
-    return (dispatch) => {
-      return dispatch(setAuthedUser(authedUser))
-    }
-
+    this.props.dispatch(setAuthedUser(authedUser))
   }
 
   handleChange = (e, { value }) => {
@@ -53,7 +54,7 @@ class Login extends Component {
             options={options}
             onChange={this.handleChange}
           />
-          <Link to="/homepage"><button type='submit' value='login' onClick={() => this.getAuthedUser(this.state.value)}>Login</button></Link>
+          <Link to="/homepage"><button disabled={this.state.value === ''} type='submit' value='login' onClick={() => this.getAuthedUser(this.state.value)}>Login</button></Link>
         </form>
       </div>
     )
