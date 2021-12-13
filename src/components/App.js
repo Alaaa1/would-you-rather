@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/initial.js'
 import HomePage from './HomePage';
 import LoadingBar from 'react-redux-loading';
-import Navbar from './Navbar'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 class App extends Component {
@@ -14,6 +13,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        <LoadingBar />
         <Routes>
           <Route path='/' exact element={<Login />} />
           <Route path='/homepage' element={<HomePage />} />
