@@ -1,54 +1,66 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { setAuthedUser } from '../actions/authedUser'
+import { connect } from 'react-redux'
 
-const friendOptions = [
+const options = [
   {
-    key: 'Jenny Hess',
-    text: 'Jenny Hess',
-    value: 'Jenny Hess',
-    image: { avatar: true, src: '/images/avatar/small/jenny.jpg' },
+    key: 'sarahedo',
+    text: 'Sarah Edo',
+    value: 'Sarah Edo',
+    image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg' },
   },
   {
-    key: 'Elliot Fu',
-    text: 'Elliot Fu',
-    value: 'Elliot Fu',
-    image: { avatar: true, src: '/images/avatar/small/elliot.jpg' },
+    key: 'tylermcginnis',
+    text: 'Tyler McGinnis',
+    value: 'Tyler McGinnis',
+    image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/matt.jpg' },
   },
   {
-    key: 'Stevie Feliciano',
-    text: 'Stevie Feliciano',
-    value: 'Stevie Feliciano',
-    image: { avatar: true, src: '/images/avatar/small/stevie.jpg' },
-  },
-  {
-    key: 'Christian',
-    text: 'Christian',
-    value: 'Christian',
-    image: { avatar: true, src: '/images/avatar/small/christian.jpg' },
-  },
-  {
-    key: 'Matt',
-    text: 'Matt',
-    value: 'Matt',
-    image: { avatar: true, src: '/images/avatar/small/matt.jpg' },
-  },
-  {
-    key: 'Justen Kitsune',
-    text: 'Justen Kitsune',
-    value: 'Justen Kitsune',
-    image: { avatar: true, src: '/images/avatar/small/justen.jpg' },
-  },
+    key: 'johndoe',
+    text: 'John Doe',
+    value: 'John Doe',
+    image: { avatar: true, src: 'https://react.semantic-ui.com/images/avatar/small/christian.jpg' },
+  }
 ]
 
-const DropdownList = () => (
-  <div><Dropdown
-    placeholder='Select Friend'
-    fluid
-    selection
-    options={friendOptions}
-  />
-    <button value='login'><a href="#">Login</a></button>
-  </div>
-)
 
-export default DropdownList
+class Login extends Component {
+
+  getAuthedUser = (authedUser) => {
+    console.log(authedUser)
+    setAuthedUser(authedUser);
+  }
+
+  handleChange = (e, { value }) => {
+    console.log(value)
+    this.setState({ value })
+  }
+
+  render() {
+    console.log("users: ", this.props.users)
+    return (
+      <div>
+        <form>
+          <Dropdown
+            placeholder='Select User'
+            fluid
+            selection
+            options={options}
+            onChange={this.handleChange}
+          />
+          <Link to="/homepage"><button type='submit' value='login' onClick={() => this.getAuthedUser(this.state.value)}>Login</button></Link>
+        </form>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = ({ users }) => {
+  return {
+    users: Object.entries(users)
+  }
+}
+
+export default connect(mapStateToProps)(Login)

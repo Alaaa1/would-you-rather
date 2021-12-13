@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Card, Image, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import Poll from './Poll'
 
-class Question extends Component {
+class Poll extends Component {
     render() {
         console.log(this.props)
         return (
@@ -24,9 +23,12 @@ class Question extends Component {
                     </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                    <div className='ui one buttons'>
+                    <div className='ui Two buttons'>
                         <Button basic color='green'>
-                            Vote
+                            {this.props.question.optionOne}
+                        </Button>
+                        <Button basic color='green'>
+                            {this.props.question.optionOne}
                         </Button>
                     </div>
                 </Card.Content>
@@ -44,4 +46,4 @@ const mapStateToProps = ({ authedUser, questions }, { id }) => {
     }
 }
 
-export default connect(mapStateToProps)(Question)
+export default connect(mapStateToProps)(Poll)
