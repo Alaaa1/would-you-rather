@@ -5,6 +5,7 @@ import { handleInitialData } from '../actions/initial.js'
 import HomePage from './HomePage';
 import LoadingBar from 'react-redux-loading';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Poll from './Poll'
 
 class App extends Component {
   componentDidMount() {
@@ -17,6 +18,7 @@ class App extends Component {
         <Routes>
           <Route path='/' exact element={<Login />} />
           <Route path='/homepage' element={<HomePage />} />
+          <Route path='/questions/:id' element={<Poll />} />
         </Routes>
       </BrowserRouter>
     )
@@ -24,7 +26,6 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ authedUser }) => {
-  console.log(authedUser)
   return {
     authedUser
   }

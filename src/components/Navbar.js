@@ -28,6 +28,9 @@ class Navbar extends Component {
                     onClick={this.handleItemClick}
                 />
                 <Menu.Menu position='right'>
+                    <Menu.Item name='welcome'>
+                        Welcome {this.props.name}!
+                    </Menu.Item>
                     <Menu.Item name='avatar'>
                         <img src={this.props.avatar} alt='avatar' />
                     </Menu.Item>
@@ -44,7 +47,8 @@ class Navbar extends Component {
 
 const mapStateToProps = ({ authedUser, users }) => {
     return {
-        avatar: users[authedUser].avatarURL
+        avatar: users[authedUser].avatarURL,
+        name: users[authedUser].name
     }
 }
 

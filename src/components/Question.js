@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import { Card, Image, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import Poll from './Poll'
+import { Link } from 'react-router-dom'
+import { getCurrentQuestion } from '../actions/questions'
 
 class Question extends Component {
+
+    handleClick = () => {
+        this.props.dispatch(getCurrentQuestion(this.props.question))
+    }
+
     render() {
-        console.log(this.props)
         return (
             <Card>
                 <Card.Content>
@@ -24,9 +29,11 @@ class Question extends Component {
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui one buttons'>
-                        <Button basic color='green'>
-                            Vote
-                        </Button>
+                        <Link to={'/questions/' + this.props.id}>
+                            <Button basic color='green' onClick={() => this.handleClick()}>
+                                Vote
+                            </Button>
+                        </Link>
                     </div>
                 </Card.Content>
             </Card>

@@ -4,31 +4,31 @@ import { connect } from 'react-redux'
 
 class Poll extends Component {
     render() {
-        console.log(this.props)
+        const question = this.props.currentQuestion
         return (
             <Card>
                 <Card.Content>
                     <Image
                         floated='right'
                         size='mini'
-                        src='https://react.semantic-ui.com/images/avatar/large/steve.jpg'
+                        src={this.props.users[question.author].avatarURL}
                     />
                     <Card.Header>Steve Sanders</Card.Header>
                     <Card.Meta>Friends of Elliot</Card.Meta>
                     <Card.Description>
                         <h3>Would You Rather</h3>
-                        <p>{this.props.question.optionOne.text}</p>
+                        <p>{question.optionOne.text}</p>
                         <p>Or</p>
-                        <p>{this.props.question.optionTwo.text}</p>
+                        <p>{question.optionTwo.text}</p>
                     </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui Two buttons'>
                         <Button basic color='green'>
-                            {this.props.question.optionOne}
+                            {question.optionOne.text}
                         </Button>
                         <Button basic color='green'>
-                            {this.props.question.optionOne}
+                            {question.optionOne.text}
                         </Button>
                     </div>
                 </Card.Content>
@@ -37,12 +37,11 @@ class Poll extends Component {
     }
 }
 
-const mapStateToProps = ({ authedUser, questions }, { id }) => {
-    const question = questions[id]
-
+const mapStateToProps = ({ users, authedUser, currentQuestion }) => {
     return {
         authedUser,
-        question,
+        currentQuestion,
+        users
     }
 }
 

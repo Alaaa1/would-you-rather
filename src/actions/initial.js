@@ -4,6 +4,7 @@ import { receiveQuestions } from './questions'
 import { setAuthedUser } from './authedUser'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
+
 export const handleInitialData = (authedUser) => {
     return (dispatch) => {
         dispatch(showLoading())
