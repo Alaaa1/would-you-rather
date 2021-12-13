@@ -4,22 +4,36 @@ import Question from './Question'
 import { connect } from 'react-redux'
 
 class Questions extends Component {
+
+    getAnsweredQuestions = () => (
+        Object.keys(this.props.questions).filter(question => Object.keys(this.props.users[this.props.authedUser].answers).includes(question))
+    )
+
+    getUnAnsweredQuestions = () => (
+        Object.keys(this.props.questions).filter(question => !(Object.keys(this.props.users[this.props.authedUser].answers)).includes(question))
+    )
     render() {
-        console.log(this.props)
         return (
             <Card.Group>
-                {this.props.qID.map(qID => (
-                    <Question key={qID} id={qID} />
-                ))}
+                {(this.props.answered) && (this.getAnsweredQuestions().map(qId => {
+                    return <Question id={qId} key={qId} />
+                }))}
+                {!(this.props.answered) && (this.getUnAnsweredQuestions().map(qId => {
+                    return <Question id={qId} key={qId} />
+                }))}
             </Card.Group>
         )
     }
 }
 
-const mapStateToProps = ({ questions }) => {
+const mapStateToProps = ({ users, questions, authedUser }, { answered }) => {
     return {
+        questions,
         qID: Object.keys(questions)
-            .sort((a, b) => questions[b].timestamp - questions[a].timestamp)
+            .sort((a, b) => questions[b].timestamp - questions[a].timestamp),
+        answered,
+        authedUser,
+        users,
     }
 }
 

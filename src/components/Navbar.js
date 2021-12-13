@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Input, Menu } from 'semantic-ui-react'
 
-export default class MenuExampleSecondary extends Component {
+class Navbar extends Component {
     state = { activeItem: 'home' }
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -27,8 +28,8 @@ export default class MenuExampleSecondary extends Component {
                     onClick={this.handleItemClick}
                 />
                 <Menu.Menu position='right'>
-                    <Menu.Item>
-                        <Input icon='search' placeholder='Search...' />
+                    <Menu.Item name='avatar'>
+                        <img src={this.props.avatar} alt='avatar' />
                     </Menu.Item>
                     <Menu.Item
                         name='logout'
@@ -40,3 +41,11 @@ export default class MenuExampleSecondary extends Component {
         )
     }
 }
+
+const mapStateToProps = ({ authedUser, users }) => {
+    return {
+        avatar: users[authedUser].avatarURL
+    }
+}
+
+export default connect(mapStateToProps)(Navbar)

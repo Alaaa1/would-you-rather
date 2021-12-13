@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData())
+    this.props.dispatch(handleInitialData(this.props.authedUser))
   }
   render() {
     return (
@@ -23,4 +23,11 @@ class App extends Component {
   }
 }
 
-export default connect()(App)
+const mapStateToProps = ({ authedUser }) => {
+  console.log(authedUser)
+  return {
+    authedUser
+  }
+}
+
+export default connect(mapStateToProps)(App)
