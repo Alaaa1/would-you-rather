@@ -3,35 +3,41 @@ import { Card, Image, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 class Poll extends Component {
+
+    handeVoting = () => {
+
+    }
+
     render() {
         const question = this.props.currentQuestion
         return (
             <Card>
-                <Card.Content>
+                {!(this.props.currentQuestion.answered) && (<><Card.Content>
                     <Image
                         floated='right'
                         size='mini'
                         src={this.props.users[question.author].avatarURL}
                     />
-                    <Card.Header>Steve Sanders</Card.Header>
-                    <Card.Meta>Friends of Elliot</Card.Meta>
+                    <Card.Header>{this.props.users[question.author].name}</Card.Header>
                     <Card.Description>
                         <h3>Would You Rather</h3>
-                        <p>{question.optionOne.text}</p>
-                        <p>Or</p>
-                        <p>{question.optionTwo.text}</p>
+                        <form>
+                            <input type="radio" id="optionOne" name="vote" value={question.optionOne.text} />
+                            <label htmlFor="optionOne"> {question.optionOne.text}</label>
+                            <p>Or</p>
+                            <input type="radio" id="optionTwo" name="vote" value={question.optionTwo.text} />
+                            <label htmlFor="optionTwo"> {question.optionTwo.text}</label>
+                        </form>
                     </Card.Description>
                 </Card.Content>
-                <Card.Content extra>
-                    <div className='ui Two buttons'>
-                        <Button basic color='green'>
-                            {question.optionOne.text}
-                        </Button>
-                        <Button basic color='green'>
-                            {question.optionOne.text}
-                        </Button>
-                    </div>
-                </Card.Content>
+                    <Card.Content extra>
+                        <div className='ui Two buttons'>
+                            <Button basic color='green' onClick={this.handeVoting}>
+                                Vote
+                            </Button>
+                        </div>
+                    </Card.Content></>)}
+
             </Card>
         )
     }

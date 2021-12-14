@@ -16,10 +16,10 @@ class Questions extends Component {
         return (
             <Card.Group>
                 {(this.props.answered) && (this.getAnsweredQuestions().map(qId => {
-                    return <Question id={qId} key={qId} />
+                    return <Question id={qId} key={qId} answered={true} />
                 }))}
                 {!(this.props.answered) && (this.getUnAnsweredQuestions().map(qId => {
-                    return <Question id={qId} key={qId} />
+                    return <Question id={qId} key={qId} answered={false} />
                 }))}
             </Card.Group>
         )

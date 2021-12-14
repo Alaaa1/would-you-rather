@@ -7,7 +7,8 @@ import { getCurrentQuestion } from '../actions/questions'
 class Question extends Component {
 
     handleClick = () => {
-        this.props.dispatch(getCurrentQuestion(this.props.question))
+        const question_withAnswered = { ...this.props.question, answered: this.props.answered }
+        this.props.dispatch(getCurrentQuestion(question_withAnswered))
     }
 
     render() {
@@ -41,13 +42,14 @@ class Question extends Component {
     }
 }
 
-const mapStateToProps = ({ authedUser, questions, users }, { id }) => {
+const mapStateToProps = ({ authedUser, questions, users }, { id, answered }) => {
     const question = questions[id]
 
     return {
         authedUser,
         question,
-        users
+        users,
+        answered
     }
 }
 

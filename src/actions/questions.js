@@ -11,6 +11,6 @@ export const receiveQuestions = (questions) => (
 export const getCurrentQuestion = (question) => (
     {
         type: GET_CURRENT_QUESTION,
-        question,
+        question
     }
 )
