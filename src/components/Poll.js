@@ -14,7 +14,6 @@ class Poll extends Component {
 
     render() {
         const question = this.props.currentQuestion
-        const value = ''
         return (
             <Card>
                 {!(this.props.currentQuestion.answered) && (<><Card.Content>
