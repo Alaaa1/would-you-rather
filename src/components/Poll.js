@@ -15,10 +15,7 @@ class Poll extends Component {
     handeVoting = (authedUser, question, answer) => {
         const qid = question.id
         _saveQuestionAnswer({ authedUser, qid, answer })
-        const answeredQuestion = { ...this.props.currentQuestion, answered: true }
-        this.props.dispatch(getCurrentQuestion(answeredQuestion))
-        this.props.dispatch(handleInitialData(authedUser))
-        this.setState({ answered: true })
+        this.props.dispatch(handleInitialData(authedUser)).then(() => this.props.dispatch(getCurrentQuestion({ ...this.props.questions[question.id], answered: true })))
         console.log(this.state)
 
     }
@@ -29,6 +26,7 @@ class Poll extends Component {
             <>
                 <Navbar />
                 <Card>
+                    {/*If not answered */}
                     {!(question.answered) && (<><Card.Content>
                         <Image
                             floated='right'
@@ -55,7 +53,23 @@ class Poll extends Component {
                                 </Button>
                             </div>
                         </Card.Content></>)}
+                    {/*If answered */}
+                    {(question.answered) && (<><Card.Content>
+                        <Image
+                            floated='right'
+                            size='mini'
+                            src={this.props.users[question.author].avatarURL}
+                        />
+                        <Card.Header>{this.props.users[question.author].name}</Card.Header>
+                        <Card.Description>
+                            <h3>Would You Rather</h3>
+                            <form>
+                                <progress id="optionOne" value={question.optionOne.votes.length} max={(question.optionOne.votes.length) + (question.optionTwo.votes.length)}></progress>
 
+                                <progress id="optionTwo" value={question.optionTwo.votes.length} max={(question.optionOne.votes.length) + (question.optionTwo.votes.length)}> </progress>
+                            </form>
+                        </Card.Description>
+                    </Card.Content></>)}
                 </Card>
             </>
         )
