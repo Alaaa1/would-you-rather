@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 class Poll extends Component {
 
-    handleClick = () => {
-
+    handleClick = (e) => {
+        this.setState({ value: e.target.value })
     }
 
     handeVoting = () => {
@@ -14,6 +14,7 @@ class Poll extends Component {
 
     render() {
         const question = this.props.currentQuestion
+        const value = ''
         return (
             <Card>
                 {!(this.props.currentQuestion.answered) && (<><Card.Content>
@@ -26,10 +27,10 @@ class Poll extends Component {
                     <Card.Description>
                         <h3>Would You Rather</h3>
                         <form>
-                            <input type="radio" id="optionOne" name="vote" value={question.optionOne.text} onClick={this.handleClick} />
+                            <input type="radio" id="optionOne" name="vote" value={question.optionOne.text} onClick={(e) => this.handleClick(e)} />
                             <label htmlFor="optionOne"> {question.optionOne.text}</label>
                             <p>Or</p>
-                            <input type="radio" id="optionTwo" name="vote" value={question.optionTwo.text} onClick={this.handleClick} />
+                            <input type="radio" id="optionTwo" name="vote" value={question.optionTwo.text} onClick={(e) => this.handleClick(e)} />
 
                             <label htmlFor="optionTwo"> {question.optionTwo.text}</label>
                         </form>
