@@ -11,7 +11,6 @@ export const handleInitialData = (authedUser) => {
             dispatch(receiveUsers(users))
             dispatch(receiveQuestions(questions))
             dispatch(setAuthedUser(authedUser))
-
         })
     }
 }
