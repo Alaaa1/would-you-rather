@@ -4,6 +4,7 @@ import { handleAddQuestion } from "../actions/questions";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
 import { handleInitialData } from "../actions/initial.js";
+import { Link } from "react-router-dom";
 
 class NewQuestion extends Component {
   state = {
@@ -28,8 +29,6 @@ class NewQuestion extends Component {
   };
 
   handleClick = (e) => {
-    e.preventDefault();
-
     const optionOne = this.state.optionOne;
     const optionTwo = this.state.optionTwo;
     console.log("new question", optionOne, optionTwo);
@@ -64,13 +63,15 @@ class NewQuestion extends Component {
             value={this.state.optionTwo}
             onChange={this.handleOptionTwo}
           />
-          <button
-            type="submit"
-            value="submit"
-            onClick={(e) => this.handleClick(e)}
-          >
-            Submit
-          </button>
+          <Link to="/homepage">
+            <button
+              type="submit"
+              value="submit"
+              onClick={(e) => this.handleClick(e)}
+            >
+              Submit
+            </button>
+          </Link>
         </Form>
       </>
     );
