@@ -5,6 +5,8 @@ import { _saveQuestionAnswer } from "../utils/_DATA";
 import { getCurrentQuestion } from "../actions/questions";
 import Navbar from "./Navbar";
 import { handleInitialData } from "../actions/initial.js";
+import { Progress } from "semantic-ui-react";
+import "../style/style.css";
 
 class Poll extends Component {
   handleClick = (e) => {
@@ -17,25 +19,33 @@ class Poll extends Component {
   handeVoting = (authedUser, question, answer) => {
     const qid = question.id;
     _saveQuestionAnswer({ authedUser, qid, answer });
-    this.props
-      .dispatch(handleInitialData(authedUser))
-      .then(() =>
-        this.props.dispatch(
-          getCurrentQuestion({
-            ...this.props.questions[question.id],
-            answered: true,
-          })
-        )
-      );
+    this.props.dispatch(handleInitialData(authedUser)).then(() =>
+      this.props.dispatch(
+        getCurrentQuestion({
+          ...this.props.questions[question.id],
+          answered: true,
+        })
+      )
+    );
     console.log(this.state);
   };
 
   render() {
     const question = this.props.currentQuestion;
+    const { users, authedUser } = this.props;
     return (
       <>
         <Navbar />
-        <Card>
+        <Card
+          style={{
+            textAlign: "center",
+            margin: "0 auto",
+            display: "block",
+            height: "auto",
+            minHeight: "100% !important",
+            overflow: "auto",
+          }}
+        >
           {/*If not answered */}
           {!question.answered && (
             <>
@@ -59,11 +69,15 @@ class Poll extends Component {
                       onClick={(e) => this.handleClick(e)}
                       required
                     />
-                    <label htmlFor="optionOne">
+                    <label htmlFor="optionOne" class="radioOptions">
                       {" "}
                       {question.optionOne.text}
                     </label>
-                    <p>Or</p>
+
+                    <center>
+                      <p>Or</p>
+                    </center>
+
                     <input
                       type="radio"
                       id="optionTwo"
@@ -73,7 +87,7 @@ class Poll extends Component {
                       required
                     />
 
-                    <label htmlFor="optionTwo">
+                    <label htmlFor="optionTwo" class="radioOptions">
                       {" "}
                       {question.optionTwo.text}
                     </label>
@@ -105,34 +119,55 @@ class Poll extends Component {
               <Card.Content>
                 <Image
                   floated="right"
-                  size="mini"
                   src={this.props.users[question.author].avatarURL}
                 />
                 <Card.Header>
                   {this.props.users[question.author].name}
                 </Card.Header>
                 <Card.Description>
+                  <h2>Results:</h2>
                   <h3>Would You Rather</h3>
                   <form>
-                    <progress
+                    {users[authedUser].answers[question.id] === "optionOne" && (
+                      <p style={{ color: "red" }}>Your Choice!</p>
+                    )}
+                    <Progress
                       id="optionOne"
-                      value={question.optionOne.votes.length}
-                      max={
-                        question.optionOne.votes.length +
-                        question.optionTwo.votes.length
+                      percent={
+                        (question.optionOne.votes.length /
+                          (question.optionOne.votes.length +
+                            question.optionTwo.votes.length)) *
+                        100
                       }
-                    ></progress>
-
-                    <progress
+                      progress
+                    ></Progress>
+                    <label for="optionOne">
+                      {question.optionOne.text}
+                      <br />
+                      {question.optionOne.votes.length} of
+                      {question.optionTwo.votes.length +
+                        question.optionOne.votes.length}
+                    </label>
+                    {users[authedUser].answers[question.id] === "optionTwo" && (
+                      <p style={{ color: "red" }}>Your Choice!</p>
+                    )}
+                    <Progress
                       id="optionTwo"
-                      value={question.optionTwo.votes.length}
-                      max={
-                        question.optionOne.votes.length +
-                        question.optionTwo.votes.length
+                      percent={
+                        (question.optionTwo.votes.length /
+                          (question.optionOne.votes.length +
+                            question.optionTwo.votes.length)) *
+                        100
                       }
-                    >
-                      {" "}
-                    </progress>
+                      progress
+                    ></Progress>
+                    <label for="optionTwo">
+                      {question.optionTwo.text}
+                      <br />
+                      {question.optionTwo.votes.length} of{" "}
+                      {question.optionTwo.votes.length +
+                        question.optionOne.votes.length}
+                    </label>
                   </form>
                 </Card.Description>
               </Card.Content>

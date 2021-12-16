@@ -17,17 +17,17 @@ class Navbar extends Component {
 
     return (
       <Menu secondary>
-        <Link to="/homepage">
-          <Menu.Item name="home" active={activeItem === "home"} />
-        </Link>
+        <Menu.Item name="home" active={activeItem === "home"}>
+          <Link to="/homepage">Home</Link>
+        </Menu.Item>
 
-        <Link to="/add">
-          <Menu.Item name="New Question" active={activeItem === "messages"} />
-        </Link>
+        <Menu.Item name="NewQuestion" active={activeItem === "NewQuestion"}>
+          <Link to="/add">New Question</Link>
+        </Menu.Item>
 
-        <Link to="/leaderboard">
-          <Menu.Item name="leaderboard" active={activeItem === "friends"} />
-        </Link>
+        <Menu.Item name="leaderboard" active={activeItem === "leaderboard"}>
+          <Link to="/leaderboard">Leaderboard</Link>
+        </Menu.Item>
 
         <Menu.Menu position="right">
           <Menu.Item name="welcome">Welcome {this.props.name}!</Menu.Item>
