@@ -3,6 +3,7 @@ import { Form } from "semantic-ui-react";
 import { handleAddQuestion } from "../actions/questions";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
+import { handleInitialData } from "../actions/initial.js";
 
 class NewQuestion extends Component {
   state = {
@@ -36,6 +37,7 @@ class NewQuestion extends Component {
     this.props.dispatch(
       handleAddQuestion(this.state.optionOne, this.state.optionTwo)
     );
+    this.props.dispatch(handleInitialData(this.props.authedUser));
 
     this.setState(() => ({
       optionOne: "",
@@ -75,4 +77,10 @@ class NewQuestion extends Component {
   }
 }
 
-export default connect()(NewQuestion);
+const mapStateToProps = ({ authedUser }) => {
+  return {
+    authedUser,
+  };
+};
+
+export default connect(mapStateToProps)(NewQuestion);

@@ -17,11 +17,24 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" exact element={<Login />} />
-          <Route path="/homepage" element={<HomePage />} />
-          <Route path="/questions/:id" element={<Poll />} />
-          <Route path="/add" element={<NewQuestion />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
+          {!this.props.authedUser && (
+            <>
+              <Route path="/" element={<Login />} />
+              <Route path="/homepage" element={<Login />} />
+              <Route path="/add" element={<Login />} />
+              <Route path="/questions/:id" element={<Login />} />
+              <Route path="/leaderboard" element={<Login />} />
+            </>
+          )}
+
+          {this.props.authedUser && (
+            <>
+              <Route path="/homepage" element={<HomePage />} />
+              <Route path="/questions/:id" element={<Poll />} />
+              <Route path="/add" element={<NewQuestion />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+            </>
+          )}
         </Routes>
       </BrowserRouter>
     );
