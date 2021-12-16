@@ -1,4 +1,4 @@
-import { RECEIVE_QUESTIONS } from "../actions/questions"
+import { RECEIVE_QUESTIONS, ADD_QUESTION } from "../actions/questions"
 
 export const questions = (state = {}, action) => {
     switch (action.type) {
@@ -7,7 +7,13 @@ export const questions = (state = {}, action) => {
                 ...state,
                 ...action.questions
             }
-        default: return state
+        case ADD_QUESTION:
+            return {
+                ...state,
+                [action.question.id]: action.question,
+            }
+        default:
+            return state
     }
 }
 

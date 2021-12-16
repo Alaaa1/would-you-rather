@@ -13,14 +13,14 @@ class Navbar extends Component {
 
         return (
             <Menu secondary>
-                <Link to="/home">
+                <Link to="/homepage">
                     <Menu.Item
                         name='home'
                         active={activeItem === 'home'}
                         onClick={this.handleItemClick}
                     /></Link>
 
-                <Link to="/new">
+                <Link to="/add">
                     <Menu.Item
                         name='New Question'
                         active={activeItem === 'messages'}
