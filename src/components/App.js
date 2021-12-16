@@ -1,36 +1,37 @@
-import React, { Component } from 'react';
-import Login from './Login'
-import { connect } from 'react-redux'
-import { handleInitialData } from '../actions/initial.js'
-import HomePage from './HomePage';
-import NewQuestion from './NewQuestion'
+import React, { Component } from "react";
+import Login from "./Login";
+import { connect } from "react-redux";
+import { handleInitialData } from "../actions/initial.js";
+import HomePage from "./HomePage";
+import NewQuestion from "./NewQuestion";
+import Leaderboard from "./Leaderboard";
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Poll from './Poll'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Poll from "./Poll";
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData(this.props.authedUser))
+    this.props.dispatch(handleInitialData(this.props.authedUser));
   }
   render() {
     return (
       <BrowserRouter>
-
         <Routes>
-          <Route path='/' exact element={<Login />} />
-          <Route path='/homepage' element={<HomePage />} />
-          <Route path='/questions/:id' element={<Poll />} />
-          <Route path='/add' element={<NewQuestion />} />
+          <Route path="/" exact element={<Login />} />
+          <Route path="/homepage" element={<HomePage />} />
+          <Route path="/questions/:id" element={<Poll />} />
+          <Route path="/add" element={<NewQuestion />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
       </BrowserRouter>
-    )
+    );
   }
 }
 
 const mapStateToProps = ({ authedUser }) => {
   return {
-    authedUser
-  }
-}
+    authedUser,
+  };
+};
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);

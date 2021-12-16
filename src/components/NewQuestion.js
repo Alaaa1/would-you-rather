@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form } from "semantic-ui-react";
 import { handleAddQuestion } from "../actions/questions";
 import { connect } from "react-redux";
+import Navbar from "./Navbar";
 
 class NewQuestion extends Component {
   state = {
@@ -44,29 +45,32 @@ class NewQuestion extends Component {
 
   render() {
     return (
-      <Form>
-        <label htmlFor="optionOne">Type poll option 1:</label>
-        <input
-          id="optionOne"
-          type="text"
-          value={this.state.optionOne}
-          onChange={this.handleOptionOne}
-        />
-        <label htmlFor="optionTwo">Type poll option 2:</label>
-        <input
-          id="optionTwo"
-          type="text"
-          value={this.state.optionTwo}
-          onChange={this.handleOptionTwo}
-        />
-        <button
-          type="submit"
-          value="submit"
-          onClick={(e) => this.handleClick(e)}
-        >
-          Submit
-        </button>
-      </Form>
+      <>
+        <Navbar />
+        <Form>
+          <label htmlFor="optionOne">Type poll option 1:</label>
+          <input
+            id="optionOne"
+            type="text"
+            value={this.state.optionOne}
+            onChange={this.handleOptionOne}
+          />
+          <label htmlFor="optionTwo">Type poll option 2:</label>
+          <input
+            id="optionTwo"
+            type="text"
+            value={this.state.optionTwo}
+            onChange={this.handleOptionTwo}
+          />
+          <button
+            type="submit"
+            value="submit"
+            onClick={(e) => this.handleClick(e)}
+          >
+            Submit
+          </button>
+        </Form>
+      </>
     );
   }
 }
