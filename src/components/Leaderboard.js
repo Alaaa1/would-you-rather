@@ -1,32 +1,93 @@
 import React, { Component } from "react";
-import { Card, Icon, Image } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
+import Navbar from "./Navbar";
 
 class LeaderBoard extends Component {
-  componentDidMount() {
-    const users = this.props.users;
-  }
-
   render() {
+    const users = this.props.users;
+    const userID = Object.keys(users).sort((a, b) => {
+      console.log(
+        users[b].questions.length + Object.keys(users[b].answers).length
+      );
+      let score =
+        users[b].questions.length +
+        Object.keys(users[b].answers).length -
+        (users[a].questions.length + Object.keys(users[a].answers).length);
+      return score;
+    });
+    console.log(userID);
     return (
-      <Card>
-        <Image src="/images/avatar/large/matthew.png" wrapped ui={false} />
-        <Card.Content>
-          <Card.Header>Matthew</Card.Header>
-          <Card.Meta>
-            <span className="date">Joined in 2015</span>
-          </Card.Meta>
-          <Card.Description>
-            Matthew is a musician living in Nashville.
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <a>
-            <Icon name="user" />
-            22 Friends
-          </a>
-        </Card.Content>
-      </Card>
+      <>
+        <Navbar />
+        <Card.Group>
+          <Card>
+            <Card.Content>
+              <Image floated="right" src={users[userID[0]].avatarURL} />
+              <Card.Header>1. {users[userID[0]].name}</Card.Header>
+              <Card.Description>
+                Answered Question:{" "}
+                {Object.keys(users[userID[0]].answers).length}
+                <br />
+                Created Questions: {users[userID[0]].questions.length}
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <div className="ui">
+                <p>
+                  Score:{" "}
+                  {users[userID[0]].questions.length +
+                    Object.keys(users[userID[0]].answers).length}
+                </p>
+              </div>
+            </Card.Content>
+          </Card>
+
+          <Card>
+            <Card.Content>
+              <Image floated="right" src={users[userID[1]].avatarURL} />
+              <Card.Header>2. {users[userID[1]].name}</Card.Header>
+              <Card.Description>
+                Answered Question:{" "}
+                {Object.keys(users[userID[1]].answers).length}
+                <br />
+                Created Questions: {users[userID[1]].questions.length}
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <div className="ui">
+                <p>
+                  Score:{" "}
+                  {users[userID[1]].questions.length +
+                    Object.keys(users[userID[1]].answers).length}
+                </p>
+              </div>
+            </Card.Content>
+          </Card>
+
+          <Card>
+            <Card.Content>
+              <Image floated="right" src={users[userID[2]].avatarURL} />
+              <Card.Header>3. {users[userID[2]].name}</Card.Header>
+              <Card.Description>
+                Answered Question:{" "}
+                {Object.keys(users[userID[2]].answers).length}
+                <br />
+                Created Questions: {users[userID[2]].questions.length}
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <div className="ui">
+                <p>
+                  Score:{" "}
+                  {users[userID[2]].questions.length +
+                    Object.keys(users[userID[2]].answers).length}
+                </p>
+              </div>
+            </Card.Content>
+          </Card>
+        </Card.Group>
+      </>
     );
   }
 }
