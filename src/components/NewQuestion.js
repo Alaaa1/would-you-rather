@@ -50,6 +50,9 @@ class NewQuestion extends Component {
       <div>
         <Navbar />
         <h2 style={{ textAlign: "center", margin: "0 auto" }}>New Question</h2>
+        <h3 style={{ textAlign: "center", margin: "0 auto" }}>
+          Would You Rather
+        </h3>
         <br />
         <Form style={{ textAlign: "center", margin: "0 auto", width: "50%" }}>
           <label htmlFor="optionOne">Type poll option 1:</label>
