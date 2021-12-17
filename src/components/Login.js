@@ -48,12 +48,10 @@ class Login extends Component {
   };
 
   getAuthedUser = (authedUser) => {
-    console.log(authedUser);
     this.props.dispatch(setAuthedUser(authedUser));
   };
 
   handleChange = (e, { value }) => {
-    console.log(value);
     this.setState({ value });
   };
 
@@ -84,7 +82,6 @@ class Login extends Component {
                 Login
               </button>
             </Link>
-            {console.log(this.props.location)}
           </form>
         </div>
       </>

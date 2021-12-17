@@ -27,13 +27,11 @@ class Poll extends Component {
         })
       )
     );
-    console.log(this.state);
   };
 
   render() {
     const question = this.props.match.params.id;
     const { users, authedUser, questions } = this.props;
-    console.log("id:", users[questions[question].author].avatarURL);
     return (
       <>
         <Navbar />
@@ -164,7 +162,7 @@ class Poll extends Component {
                       }
                       progress
                     ></Progress>
-                    <label for="optionTwo">
+                    <label htmlFor="optionTwo">
                       {questions[question].optionTwo.text}
                       <br />
                       {questions[question].optionTwo.votes.length} of{" "}

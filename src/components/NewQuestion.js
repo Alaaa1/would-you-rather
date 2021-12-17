@@ -31,11 +31,8 @@ class NewQuestion extends Component {
   handleClick = (e) => {
     const optionOne = this.state.optionOne;
     const optionTwo = this.state.optionTwo;
-    console.log("new question", optionOne, optionTwo);
 
-    this.props.dispatch(
-      handleAddQuestion(this.state.optionOne, this.state.optionTwo)
-    );
+    this.props.dispatch(handleAddQuestion(optionOne, optionTwo));
     this.props.dispatch(handleInitialData(this.props.authedUser));
 
     this.setState(() => ({
@@ -45,7 +42,6 @@ class NewQuestion extends Component {
   };
 
   render() {
-    console.log("hi");
     return (
       <div>
         <Navbar />

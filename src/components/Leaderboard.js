@@ -13,7 +13,6 @@ class LeaderBoard extends Component {
         (users[a].questions.length + Object.keys(users[a].answers).length);
       return score;
     });
-    console.log(userID);
     return (
       <>
         <Navbar />

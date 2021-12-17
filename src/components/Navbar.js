@@ -22,41 +22,42 @@ class Navbar extends Component {
     return (
       <Menu secondary>
         <Menu.Item
+          as={Link}
           name="home"
           active={activeItem === "home"}
+          to="/homepage"
           onClick={this.handleItemClick}
-        >
-          <Link to="/homepage">Home</Link>
-        </Menu.Item>
+        ></Menu.Item>
 
         <Menu.Item
+          as={Link}
           name="NewQuestion"
           active={activeItem === "NewQuestion"}
+          to="/add"
           onClick={this.handleItemClick}
-        >
-          <Link to="/add">New Question</Link>
-        </Menu.Item>
+        ></Menu.Item>
 
         <Menu.Item
+          as={Link}
           name="leaderboard"
           active={activeItem === "leaderboard"}
           onClick={this.handleItemClick}
-        >
-          <Link to="/leaderboard">Leaderboard</Link>
-        </Menu.Item>
+          to="/leaderboard"
+        ></Menu.Item>
 
         <Menu.Menu position="right">
           <Menu.Item name="welcome">Welcome {this.props.name}!</Menu.Item>
           <Menu.Item name="avatar">
             <img src={this.props.avatar} alt="avatar" />
           </Menu.Item>
+
           <Menu.Item
+            as={Link}
             name="logout"
             active={activeItem === "logout"}
             onClick={this.handleLogOut}
-          >
-            <Link to="/">Logout</Link>
-          </Menu.Item>
+            to="/"
+          ></Menu.Item>
         </Menu.Menu>
       </Menu>
     );
