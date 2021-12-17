@@ -53,9 +53,7 @@ class Login extends Component {
     console.log("users: ", this.props.users);
     return (
       <>
-        <h2
-          style={{ textAlign: "center", marginTop: "0 auto", marginTop: "10%" }}
-        >
+        <h2 style={{ textAlign: "center", margin: "0 auto", marginTop: "10%" }}>
           Welcome to Would You Rather App
         </h2>
         <br />
