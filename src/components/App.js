@@ -5,8 +5,7 @@ import { handleInitialData } from "../actions/initial.js";
 import HomePage from "./HomePage";
 import NewQuestion from "./NewQuestion";
 import Leaderboard from "./Leaderboard";
-
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Poll from "./Poll";
 
 class App extends Component {
@@ -16,26 +15,22 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Routes>
+        <Switch>
           {!this.props.authedUser && (
             <>
-              <Route path="/" element={<Login />} />
-              <Route path="/homepage" element={<Login />} />
-              <Route path="/add" element={<Login />} />
-              <Route path="/questions/:id" element={<Login />} />
-              <Route path="/leaderboard" element={<Login />} />
+              <Route path="/" component={Login} />
             </>
           )}
 
           {this.props.authedUser && (
             <>
-              <Route path="/homepage" element={<HomePage />} />
-              <Route path="/questions/:id" element={<Poll />} />
-              <Route path="/add" element={<NewQuestion />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/add" component={NewQuestion}></Route>
+              <Route path="/homepage" component={HomePage}></Route>
+              <Route path="/leaderboard" component={Leaderboard}></Route>
+              <Route path={"/questions/:id"} component={Poll}></Route>
             </>
           )}
-        </Routes>
+        </Switch>
       </BrowserRouter>
     );
   }

@@ -7,9 +7,6 @@ class LeaderBoard extends Component {
   render() {
     const users = this.props.users;
     const userID = Object.keys(users).sort((a, b) => {
-      console.log(
-        users[b].questions.length + Object.keys(users[b].answers).length
-      );
       let score =
         users[b].questions.length +
         Object.keys(users[b].answers).length -

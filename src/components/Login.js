@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Dropdown } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { setAuthedUser } from "../actions/authedUser";
 import { connect } from "react-redux";
 
@@ -39,6 +39,14 @@ class Login extends Component {
     value: "",
   };
 
+  handleDestination = () => {
+    if (this.props.location.pathname === "/") {
+      return "/homepage";
+    } else {
+      return this.props.location.pathname;
+    }
+  };
+
   getAuthedUser = (authedUser) => {
     console.log(authedUser);
     this.props.dispatch(setAuthedUser(authedUser));
@@ -50,7 +58,6 @@ class Login extends Component {
   };
 
   render() {
-    console.log("users: ", this.props.users);
     return (
       <>
         <h2 style={{ textAlign: "center", margin: "0 auto", marginTop: "10%" }}>
@@ -67,7 +74,7 @@ class Login extends Component {
               options={options}
               onChange={this.handleChange}
             />
-            <Link to="/homepage">
+            <Link to={this.handleDestination}>
               <button
                 disabled={this.state.value === ""}
                 type="submit"
@@ -77,6 +84,7 @@ class Login extends Component {
                 Login
               </button>
             </Link>
+            {console.log(this.props.location)}
           </form>
         </div>
       </>
@@ -90,4 +98,4 @@ const mapStateToProps = ({ users }) => {
   };
 };
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(withRouter(Login));

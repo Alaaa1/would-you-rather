@@ -29,7 +29,11 @@ class QuestionsTab extends Component {
         <br />
         <Tab
           panes={panes}
-          style={{ textAlign: "center", margin: "0 auto", width: "47%" }}
+          style={{
+            textAlign: "center",
+            margin: "0 auto",
+            width: "50%",
+          }}
         />
       </>
     );

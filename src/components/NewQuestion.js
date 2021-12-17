@@ -45,8 +45,9 @@ class NewQuestion extends Component {
   };
 
   render() {
+    console.log("hi");
     return (
-      <>
+      <div>
         <Navbar />
         <h2 style={{ textAlign: "center", margin: "0 auto" }}>New Question</h2>
         <br />
@@ -75,7 +76,7 @@ class NewQuestion extends Component {
             </button>
           </Link>
         </Form>
-      </>
+      </div>
     );
   }
 }

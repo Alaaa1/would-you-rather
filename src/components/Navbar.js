@@ -54,7 +54,9 @@ class Navbar extends Component {
             name="logout"
             active={activeItem === "logout"}
             onClick={this.handleLogOut}
-          />
+          >
+            <Link to="/">Logout</Link>
+          </Menu.Item>
         </Menu.Menu>
       </Menu>
     );

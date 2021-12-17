@@ -35,7 +35,7 @@ class Question extends Component {
           <div className="ui one buttons">
             <Link to={"/questions/" + this.props.id}>
               <Button basic color="green" onClick={() => this.handleClick()}>
-                Vote
+                View
               </Button>
             </Link>
           </div>

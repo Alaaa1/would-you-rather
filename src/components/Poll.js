@@ -31,8 +31,9 @@ class Poll extends Component {
   };
 
   render() {
-    const question = this.props.currentQuestion;
-    const { users, authedUser } = this.props;
+    const question = this.props.match.params.id;
+    const { users, authedUser, questions } = this.props;
+    console.log("id:", users[questions[question].author].avatarURL);
     return (
       <>
         <Navbar />
@@ -49,16 +50,16 @@ class Poll extends Component {
           }}
         >
           {/*If not answered */}
-          {!question.answered && (
+          {!this.props.currentQuestion.answered && (
             <>
               <Card.Content>
                 <Image
                   floated="right"
                   size="mini"
-                  src={this.props.users[question.author].avatarURL}
+                  src={users[questions[question].author].avatarURL}
                 />
                 <Card.Header>
-                  {this.props.users[question.author].name}
+                  {users[questions[question].author].name}
                 </Card.Header>
                 <Card.Description>
                   <h3>Would You Rather</h3>
@@ -71,9 +72,9 @@ class Poll extends Component {
                       onClick={(e) => this.handleClick(e)}
                       required
                     />
-                    <label htmlFor="optionOne" class="radioOptions">
+                    <label htmlFor="optionOne" className="radioOptions">
                       {" "}
-                      {question.optionOne.text}
+                      {questions[question].optionOne.text}
                     </label>
 
                     <center>
@@ -89,9 +90,9 @@ class Poll extends Component {
                       required
                     />
 
-                    <label htmlFor="optionTwo" class="radioOptions">
+                    <label htmlFor="optionTwo" className="radioOptions">
                       {" "}
-                      {question.optionTwo.text}
+                      {questions[question].optionTwo.text}
                     </label>
                   </form>
                 </Card.Description>
@@ -104,7 +105,7 @@ class Poll extends Component {
                     onClick={() =>
                       this.handeVoting(
                         this.props.authedUser,
-                        question,
+                        questions[question],
                         this.state.value
                       )
                     }
@@ -116,59 +117,59 @@ class Poll extends Component {
             </>
           )}
           {/*If answered */}
-          {question.answered && (
+          {this.props.currentQuestion.answered && (
             <>
               <Card.Content>
                 <Image
                   floated="right"
-                  src={this.props.users[question.author].avatarURL}
+                  src={users[questions[question].author].avatarURL}
                 />
                 <Card.Header>
-                  {this.props.users[question.author].name}
+                  {users[questions[question].author].name}
                 </Card.Header>
                 <Card.Description>
                   <h2>Results:</h2>
                   <h3>Would You Rather</h3>
                   <form>
-                    {users[authedUser].answers[question.id] === "optionOne" && (
+                    {users[authedUser].answers[question] === "optionOne" && (
                       <p style={{ color: "red" }}>Your Choice!</p>
                     )}
                     <Progress
                       id="optionOne"
                       percent={
-                        (question.optionOne.votes.length /
-                          (question.optionOne.votes.length +
-                            question.optionTwo.votes.length)) *
+                        (questions[question].optionOne.votes.length /
+                          (questions[question].optionOne.votes.length +
+                            questions[question].optionTwo.votes.length)) *
                         100
                       }
                       progress
                     ></Progress>
-                    <label for="optionOne">
-                      {question.optionOne.text}
+                    <label htmlFor="optionOne">
+                      {questions[question].optionOne.text}
                       <br />
-                      {question.optionOne.votes.length} of
-                      {question.optionTwo.votes.length +
-                        question.optionOne.votes.length}
+                      {questions[question].optionOne.votes.length} of
+                      {questions[question].optionTwo.votes.length +
+                        questions[question].optionOne.votes.length}
                     </label>
-                    {users[authedUser].answers[question.id] === "optionTwo" && (
+                    {users[authedUser].answers[question] === "optionTwo" && (
                       <p style={{ color: "red" }}>Your Choice!</p>
                     )}
                     <Progress
                       id="optionTwo"
                       percent={
-                        (question.optionTwo.votes.length /
-                          (question.optionOne.votes.length +
-                            question.optionTwo.votes.length)) *
+                        (questions[question].optionTwo.votes.length /
+                          (questions[question].optionOne.votes.length +
+                            questions[question].optionTwo.votes.length)) *
                         100
                       }
                       progress
                     ></Progress>
                     <label for="optionTwo">
-                      {question.optionTwo.text}
+                      {questions[question].optionTwo.text}
                       <br />
-                      {question.optionTwo.votes.length} of{" "}
-                      {question.optionTwo.votes.length +
-                        question.optionOne.votes.length}
+                      {questions[question].optionTwo.votes.length} of{" "}
+                      {questions[question].optionTwo.votes.length +
+                        questions[question].optionOne.votes.length}
                     </label>
                   </form>
                 </Card.Description>
