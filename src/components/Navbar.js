@@ -9,6 +9,10 @@ class Navbar extends Component {
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
+  };
+
+  handleLogOut = ({ name }) => {
+    this.setState({ activeItem: name });
     this.props.dispatch(setAuthedUser(null));
   };
 
@@ -17,15 +21,27 @@ class Navbar extends Component {
 
     return (
       <Menu secondary>
-        <Menu.Item name="home" active={activeItem === "home"}>
+        <Menu.Item
+          name="home"
+          active={activeItem === "home"}
+          onClick={this.handleItemClick}
+        >
           <Link to="/homepage">Home</Link>
         </Menu.Item>
 
-        <Menu.Item name="NewQuestion" active={activeItem === "NewQuestion"}>
+        <Menu.Item
+          name="NewQuestion"
+          active={activeItem === "NewQuestion"}
+          onClick={this.handleItemClick}
+        >
           <Link to="/add">New Question</Link>
         </Menu.Item>
 
-        <Menu.Item name="leaderboard" active={activeItem === "leaderboard"}>
+        <Menu.Item
+          name="leaderboard"
+          active={activeItem === "leaderboard"}
+          onClick={this.handleItemClick}
+        >
           <Link to="/leaderboard">Leaderboard</Link>
         </Menu.Item>
 
@@ -37,7 +53,7 @@ class Navbar extends Component {
           <Menu.Item
             name="logout"
             active={activeItem === "logout"}
-            onClick={this.handleItemClick}
+            onClick={this.handleLogOut}
           />
         </Menu.Menu>
       </Menu>

@@ -36,6 +36,8 @@ class Poll extends Component {
     return (
       <>
         <Navbar />
+        <h2 style={{ textAlign: "center", margin: "0 auto" }}>Poll</h2>
+        <br />
         <Card
           style={{
             textAlign: "center",

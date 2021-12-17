@@ -24,7 +24,14 @@ const panes = [
 class QuestionsTab extends Component {
   render() {
     return (
-      <Tab panes={panes} style={{ textAlign: "center", margin: "0 auto" }} />
+      <>
+        <h2 style={{ textAlign: "center", margin: "0 auto" }}>Home Page</h2>
+        <br />
+        <Tab
+          panes={panes}
+          style={{ textAlign: "center", margin: "0 auto", width: "47%" }}
+        />
+      </>
     );
   }
 }
