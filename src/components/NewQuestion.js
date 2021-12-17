@@ -3,7 +3,6 @@ import { Form } from "semantic-ui-react";
 import { handleAddQuestion } from "../actions/questions";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
-import { handleInitialData } from "../actions/initial.js";
 import { Link } from "react-router-dom";
 
 class NewQuestion extends Component {
@@ -33,7 +32,6 @@ class NewQuestion extends Component {
     const optionTwo = this.state.optionTwo;
 
     this.props.dispatch(handleAddQuestion(optionOne, optionTwo));
-    this.props.dispatch(handleInitialData(this.props.authedUser));
 
     this.setState(() => ({
       optionOne: "",

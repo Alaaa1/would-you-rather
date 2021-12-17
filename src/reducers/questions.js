@@ -8,7 +8,6 @@ export const questions = (state = {}, action) => {
                 ...action.questions
             }
         case ADD_QUESTION:
-            console.log()
             return {
                 ...state,
                 [action.question.id]: action.question,

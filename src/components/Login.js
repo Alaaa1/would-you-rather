@@ -40,6 +40,7 @@ class Login extends Component {
   };
 
   handleDestination = () => {
+    console.log(this.props.location);
     if (this.props.location.pathname === "/") {
       return "/homepage";
     } else {
@@ -59,10 +60,13 @@ class Login extends Component {
     return (
       <>
         <h2 style={{ textAlign: "center", margin: "0 auto", marginTop: "10%" }}>
-          Welcome to Would You Rather App
-        </h2>
+          Welcome to Would You Rather App{" "}
+        </h2>{" "}
         <br />
-        <h2 style={{ textAlign: "center", margin: "0 auto" }}>Please Login:</h2>
+        <h2 style={{ textAlign: "center", margin: "0 auto" }}>
+          {" "}
+          Please Login:{" "}
+        </h2>{" "}
         <div style={{ width: "50%", textAlign: "center", margin: "0 auto" }}>
           <form>
             <Dropdown
@@ -71,7 +75,7 @@ class Login extends Component {
               selection
               options={options}
               onChange={this.handleChange}
-            />
+            />{" "}
             <Link to={this.handleDestination}>
               <button
                 disabled={this.state.value === ""}
@@ -79,11 +83,11 @@ class Login extends Component {
                 value="login"
                 onClick={() => this.getAuthedUser(this.state.value)}
               >
-                Login
-              </button>
-            </Link>
-          </form>
-        </div>
+                Login{" "}
+              </button>{" "}
+            </Link>{" "}
+          </form>{" "}
+        </div>{" "}
       </>
     );
   }

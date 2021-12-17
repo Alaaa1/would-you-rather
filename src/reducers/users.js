@@ -1,4 +1,5 @@
 import { RECEIVE_USERS } from "../actions/users";
+import { ADD_QUESTION_TO_USER } from "../actions/questions"
 
 export const users = (state = {}, action) => {
     switch (action.type) {
@@ -7,7 +8,17 @@ export const users = (state = {}, action) => {
                 ...state,
                 ...action.users
             }
-        default: return state
+        case ADD_QUESTION_TO_USER:
+            let question = action.question
+            return {
+                ...state,
+                [action.authedUser]: {
+                    ...state[action.authedUser],
+                    questions: state[action.authedUser].questions.concat([question.id])
+                }
+            }
+        default:
+            return state
     }
 }
 
