@@ -20,7 +20,7 @@ class LeaderBoard extends Component {
     return (
       <>
         <Navbar />
-        <Card.Group>
+        <Card.Group style={{ textAlign: "center", margin: "0 auto" }}>
           <Card>
             <Card.Content>
               <Image floated="right" src={users[userID[0]].avatarURL} />
