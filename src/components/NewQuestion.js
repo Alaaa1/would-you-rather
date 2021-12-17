@@ -48,7 +48,7 @@ class NewQuestion extends Component {
     return (
       <>
         <Navbar />
-        <Form>
+        <Form style={{ textAlign: "center", margin: "0 auto", width: "50%" }}>
           <label htmlFor="optionOne">Type poll option 1:</label>
           <input
             id="optionOne"
