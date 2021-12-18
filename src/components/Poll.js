@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Card, Image, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { _saveQuestionAnswer } from "../utils/_DATA";
 import { getCurrentQuestion } from "../actions/questions";
 import Navbar from "./Navbar";
-import { handleInitialData } from "../actions/initial.js";
 import { Progress } from "semantic-ui-react";
 import "../style/style.css";
+import { handleUpdateUserAnswers } from "../actions/users";
 
 class Poll extends Component {
   handleClick = (e) => {
@@ -16,16 +15,14 @@ class Poll extends Component {
     });
   };
 
-  handeVoting = (authedUser, question, answer) => {
+  handeVoting = (question, answer) => {
     const qid = question.id;
-    _saveQuestionAnswer({ authedUser, qid, answer });
-    this.props.dispatch(handleInitialData(authedUser)).then(() =>
-      this.props.dispatch(
-        getCurrentQuestion({
-          ...this.props.questions[question.id],
-          answered: true,
-        })
-      )
+    this.props.dispatch(handleUpdateUserAnswers(qid, answer));
+    this.props.dispatch(
+      getCurrentQuestion({
+        ...this.props.questions[question.id],
+        answered: true,
+      })
     );
   };
 
@@ -101,11 +98,7 @@ class Poll extends Component {
                     basic
                     color="green"
                     onClick={() =>
-                      this.handeVoting(
-                        this.props.authedUser,
-                        questions[question],
-                        this.state.value
-                      )
+                      this.handeVoting(questions[question], this.state.value)
                     }
                   >
                     Vote
